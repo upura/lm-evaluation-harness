@@ -52,6 +52,7 @@ from . import gsm8k
 from . import storycloze
 from . import toxigen
 from . import crowspairs
+from . import code_eval
 
 ########################################
 # Translation tasks
@@ -110,6 +111,12 @@ TASK_REGISTRY = {
     "lambada_standard": lambada.LambadaStandard,
     "lambada_openai_cloze": lambada_cloze.LambadaOpenAICloze,
     "lambada_standard_cloze": lambada_cloze.LambadaStandardCloze,
+    # code eval
+    "code_eval_py": code_eval.CodeEvalPy,
+    "code_eval_js": code_eval.CodeEvalJS,
+    "code_eval_java": code_eval.CodeEvalJava,
+    "code_eval_go": code_eval.CodeEvalGO,
+    "code_eval_cpp": code_eval.CodeEvalCPP,
     # multilingual lambada
     **lambada_multilingual.construct_tasks(),
     "wikitext": wikitext.WikiText,
