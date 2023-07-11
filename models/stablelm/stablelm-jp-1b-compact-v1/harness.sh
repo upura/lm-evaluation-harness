@@ -10,4 +10,4 @@ python main.py \
     --tasks $TASK \
     --num_fewshot $NUM_FEW_SHOTS \
     --device "cuda" \
-    --output_path "models/stablelm-jp-1b-compact-v1/result.json"
+    --output_path "models/stablelm/stablelm-jp-1b-compact-v1/result.json"
