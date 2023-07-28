@@ -1,37 +1,41 @@
 {
   "results": {
     "jcommonsenseqa-1.1-0.3": {
-      "acc": 0.6827524575513851,
-      "acc_stderr": 0.01391905873675049,
-      "acc_norm": 0.6425379803395889,
-      "acc_norm_stderr": 0.014333209625758979
+      "acc": 0.5290437890974083,
+      "acc_stderr": 0.014928465632785262,
+      "acc_norm": 0.47899910634495085,
+      "acc_norm_stderr": 0.014940518992025224
     },
     "jnli-1.1-0.3": {
-      "acc": 0.40139687756778963,
-      "acc_stderr": 0.009937689640925078,
-      "acc_norm": 0.3800328677074774,
-      "acc_norm_stderr": 0.009840651637385577
+      "acc": 0.14502875924404274,
+      "acc_stderr": 0.007138907658960349,
+      "acc_norm": 0.14502875924404274,
+      "acc_norm_stderr": 0.007138907658960349
     },
     "marc_ja-1.1-0.3": {
-      "acc": 0.7493809692253272,
-      "acc_stderr": 0.005763932154731777,
-      "acc_norm": 0.7493809692253272,
-      "acc_norm_stderr": 0.005763932154731777
+      "acc": 0.8787931635856295,
+      "acc_stderr": 0.004310383603154956,
+      "acc_norm": 0.8787931635856295,
+      "acc_norm_stderr": 0.004310383603154956
+    },
+    "xwinograd_ja": {
+      "acc": 0.6934306569343066,
+      "acc_stderr": 0.014896461761942498
     },
     "jsquad-1.1-0.3": {
-      "exact_match": 52.971634398919406,
-      "f1": 61.69832457374507
+      "exact_match": 19.878433138226026,
+      "f1": 29.958561688708237
     },
     "jaqket_v2-0.1-0.3": {
-      "exact_match": 44.75945017182131,
-      "f1": 50.09262358489162
+      "exact_match": 23.969072164948454,
+      "f1": 32.27647114245051
     },
     "xlsum_ja-1.0-0.3": {
-      "rouge2": 4.792924964504725
+      "rouge2": 6.241643153601687
     },
     "mgsm-1.0-0.3": {
-      "acc": 0.016,
-      "acc_stderr": 0.007951661188874326
+      "acc": 0.004,
+      "acc_stderr": 0.004000000000000008
     }
   },
   "versions": {
@@ -41,19 +45,21 @@
     "jsquad-1.1-0.3": 1.1,
     "jaqket_v2-0.1-0.3": 0.1,
     "xlsum_ja-1.0-0.3": 1.0,
+    "xwinograd_ja": 1.0,
     "mgsm-1.0-0.3": 1.0
   },
   "config": {
     "model": "hf-causal",
-    "model_args": "pretrained=sft/models/stablelm-jp-instruct-3b_1.5.2/,tokenizer=tokenizers/nai-hf-tokenizer/,use_fast=False",
+    "model_args": "pretrained=/fsx/proj-jp-stablegpt/sft/models/stablelm-jp-instruct-3b_1.5.2/,tokenizer=/fsx/proj-jp-stablegpt/tokenizers/nai-hf-tokenizer/,use_fast=False",
     "num_fewshot": [
-      3,
-      3,
-      3,
-      2,
-      1,
-      1,
-      4
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "batch_size": null,
     "device": "cuda",
