@@ -10,4 +10,4 @@ python main.py \
     --num_fewshot $NUM_FEW_SHOTS \
     --device "cuda" \
     --verbose \
-    --output_path "models/elyza/ELYZA-japanese-Llama-2-7b/result-prompt03.json"
+    --output_path "models/elyza/ELYZA-japanese-Llama-2-7b/result-0shot-prompt03.json"
