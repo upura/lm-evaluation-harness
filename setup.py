@@ -36,7 +36,7 @@ setuptools.setup(
         "sqlitedict",
         "torch>=1.7",
         "tqdm-multiprocess",
-        "transformers>=4.1",
+        "transformers>=4.1, <4.34.0",
         "zstandard",
     ],
     extras_require={
