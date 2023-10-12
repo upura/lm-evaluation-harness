@@ -134,6 +134,26 @@ class JCommonsenseQAWithFintanPrompt(JCommonsenseQA):
         return f"{doc['gold']}"
 
 
+class JCommonsenseQAWithFintanPromptV21(JCommonsenseQA):
+    VERSION = 1.1
+    PROMPT_VERSION = 0.21
+    DESCRIPTION = "与えられた選択肢の中から、最適な答えを選んでください。 \n\n"
+
+    def doc_to_text(self, doc):
+        """
+        与えられた選択肢の中から、最適な答えを選んでください。
+
+        質問：{question}
+        選択肢：
+        - {choice0}
+        - {choice4}
+        回答：
+        """
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]])
+        input_text = f"質問：{doc['goal']}\n選択肢：\n{choices}\n回答："
+        return input_text
+
+
 class JCommonsenseQAWithJAAlpacaPrompt(JCommonsenseQA):
     """
     This prompt format was inspired by the below data in fujiki/japanese_alpaca_data.
@@ -246,6 +266,7 @@ class JCommonsenseQAWithLlama2(JCommonsenseQA):
 VERSIONS = [
     JCommonsenseQA,
     JCommonsenseQAWithFintanPrompt,
+    JCommonsenseQAWithFintanPromptV21,
     JCommonsenseQAWithJAAlpacaPrompt,
     JCommonsenseQAWithRinnaInstructionSFT,
     JCommonsenseQAWithRinnaBilingualInstructionSFT,
