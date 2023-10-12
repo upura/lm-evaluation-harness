@@ -8,6 +8,8 @@ JGLUE has been constructed from scratch without translation.
 Homepage: https://github.com/yahoojapan/JGLUE
 """
 import os
+import time
+
 from lm_eval.base import MultipleChoiceTask, rf
 import numpy as np
 
@@ -118,6 +120,7 @@ class JCommonsenseQAWithFintanPrompt(JCommonsenseQA):
     DESCRIPTION = (
         "質問と回答の選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。 \n\n"
     )
+    DID_WARNING = False
 
     def doc_to_text(self, doc):
         """
@@ -125,6 +128,14 @@ class JCommonsenseQAWithFintanPrompt(JCommonsenseQA):
         選択肢:0.choice0,1.choice1, ...,4.choice4
         回答:
         """
+        if not self.DID_WARNING:
+            print(
+                "#" * 100
+                + "\n\nprompt version `0.2` for JCommonsenseQA tends to output low scores! We highly recommend using `0.2.1` instead!\n\n"
+                + "#" * 100
+            )
+            self.DID_WARNING = True
+            time.sleep(5)
         choices = ",".join(
             [f"{idx}.{choice}" for idx, choice in enumerate(doc["choices"])]
         )
@@ -136,7 +147,7 @@ class JCommonsenseQAWithFintanPrompt(JCommonsenseQA):
 
 class JCommonsenseQAWithFintanPromptV21(JCommonsenseQA):
     VERSION = 1.1
-    PROMPT_VERSION = 0.21
+    PROMPT_VERSION = "0.2.1"
     DESCRIPTION = "与えられた選択肢の中から、最適な答えを選んでください。 \n\n"
 
     def doc_to_text(self, doc):
