@@ -489,6 +489,28 @@ class JAQKETV2WithLlama2(JAQKETV2WithJAAlpacaPrompt):
     DESCRIPTION = f"<s>[INST] <<SYS>>\n{SYSTEM_PROMPT}\n<</SYS>>\n\n"
     FEWSHOT_SEP = " </s><s>[INST] "
 
+    def preprocess_ctx(self, ctx, max_length):
+        # if ctx fits in max length, return
+        if len(self.tokenizer.encode(ctx)) <= max_length:
+            return ctx
+
+        # if ctx is too long, split on a tag that separates each example
+        _, remainder = ctx.split(self.DESCRIPTION, 1)
+        ctxs = remainder.split(self.FEWSHOT_SEP)
+        # if there is no example and still the description + QA prompt is too long, fail
+        if len(ctxs) < 2:
+            raise ValueError(
+                f"description + QA prompt with no example (0-shot) doesn't fit in max_length. ctx: {ctx}"
+            )
+
+        # delete the first example, the last includes QA prompt to be answered by lm
+        del ctxs[0]
+
+        # recur
+        return self.preprocess_ctx(
+            self.DESCRIPTION + self.FEWSHOT_SEP.join(ctxs), max_length
+        )
+
     def doc_to_text(self, doc):
         """
         Insert the following prompt into `{{ user_msg }}`, which is based on prompt version 0.3
